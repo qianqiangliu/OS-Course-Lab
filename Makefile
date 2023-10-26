@@ -8,7 +8,7 @@ QEMU := qemu-system-aarch64
 _QEMU := $(PROJECT_DIR)/scripts/qemu/qemu_wrapper.sh $(QEMU)
 QEMU_GDB_PORT := 1234
 QEMU_OPTS := -machine raspi3b -nographic -serial mon:stdio -m size=1G -kernel $(KERNEL_IMG)
-GDB := gdb-multiarch
+GDB := aarch64-linux-gnu-gdb
 CHBUILD := $(PROJECT_DIR)/chbuild -l
 
 .PHONY: all
