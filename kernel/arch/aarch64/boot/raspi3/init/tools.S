@@ -68,10 +68,7 @@
 #define ICC_SRE_EL2             S3_4_C12_C9_5
 
 BEGIN_FUNC(arm64_elX_to_el1)
-	/* LAB 1 TODO 1 BEGIN */
-	/* BLANK BEGIN */
-	/* BLANK END */
-	/* LAB 1 TODO 1 END */
+	mrs x9, CurrentEL
 
 	// Check the current exception level.
 	cmp x9, CURRENTEL_EL1
@@ -87,10 +84,10 @@ BEGIN_FUNC(arm64_elX_to_el1)
 	msr scr_el3, x9
 
 	// Set the return address and exception level.
-	/* LAB 1 TODO 2 BEGIN */
-	/* BLANK BEGIN */
-	/* BLANK END */
-	/* LAB 1 TODO 2 END */
+	adr x9, .Ltarget
+	msr elr_el3, x9
+	mov x9, SPSR_ELX_DAIF | SPSR_ELX_EL1H
+	msr spsr_el3, x9
 
 .Lin_el2:
 	// Disable EL1 timer traps and the timer offset.
@@ -264,11 +261,7 @@ BEGIN_FUNC(el1_mmu_activate)
 	isb
 
 	mrs     x8, sctlr_el1
-	/* Enable MMU */
-	/* LAB 1 TODO 4 BEGIN */
-	/* BLANK BEGIN */
-	/* BLANK END */
-	/* LAB 1 TODO 4 END */
+	orr     x8, x8, #SCTLR_EL1_M
 	/* Disable alignment checking */
 	bic     x8, x8, #SCTLR_EL1_A
 	bic     x8, x8, #SCTLR_EL1_SA0
